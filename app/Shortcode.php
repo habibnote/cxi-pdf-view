@@ -38,7 +38,7 @@ class Shortcode extends Base {
      */
     public function cxi_shortcode() {
 
-        $token = $_GET['token'];
+        $token = $_GET['token'] ?? '';
 
         /**
          * Class for decript and token
