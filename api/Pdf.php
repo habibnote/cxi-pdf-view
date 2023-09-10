@@ -1,5 +1,5 @@
 <?php
-namespace Codexpert\CX_Plugin\API;
+namespace Codexpert\CXI_PDF_view\API;
 
 use mukto90\Ncrypt;
 

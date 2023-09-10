@@ -14,9 +14,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Codexpert\\CX_Plugin\\" : "classes/",
-            "Codexpert\\CX_Plugin\\App\\" : "app/",
-            "Codexpert\\CX_Plugin\\API\\" : "api/"
+            "Codexpert\\CXI_PDF_view\\" : "classes/",
+            "Codexpert\\CXI_PDF_view\\App\\" : "app/",
+            "Codexpert\\CXI_PDF_view\\API\\" : "api/"
         },
         "files": []
     }

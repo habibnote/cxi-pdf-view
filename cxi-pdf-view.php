@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: CX Plugin
+ * Plugin Name: CXI PDF View
  * Description: Just another plugin by Md. Habib
  * Plugin URI: https://me.habibnote.com
  * Author: Md. Habibur Rahman
@@ -9,7 +9,7 @@
  * Requires at least: 5.0
  * Tested up to: 6.3
  * Requires PHP: 7.4
- * Text Domain: cx-plugin
+ * Text Domain: cxi-pdf-view
  * Domain Path: /languages
  *
  * CX_Plugin is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
  * GNU General Public License for more details.
  */
 
-namespace Codexpert\CX_Plugin;
+namespace Codexpert\CXI_PDF_view;
 
 use Pluggable\Marketing\Deactivator;
 
@@ -179,7 +179,7 @@ final class Plugin {
 			 * Settings related hooks
 			 */
 			$settings = new App\Settings();
-			// $settings->action( 'plugins_loaded', 'init_menu' );
+			$settings->action( 'plugins_loaded', 'init_menu' );
 
 			/**
 			 * Shows a popup window asking why a user is deactivating the plugin
@@ -191,15 +191,6 @@ final class Plugin {
 			$deactivator = new Deactivator( CXP_FILE );
 
 		else : // ! is_admin() ?
-
-			/**
-			 * Front facing hooks
-			 */
-			$front = new App\Front();
-			$front->action( 'wp_head', 'head' );
-			$front->action( 'wp_footer', 'modal' );
-			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
-			$front->action( 'admin_bar_menu', 'add_admin_bar', 70 );
 
 			/**
 			 * Shortcode related hooks
@@ -214,13 +205,6 @@ final class Plugin {
 			$api->action( 'rest_api_init', 'register_endpoints' );
 
 		endif;
-
-		/**
-		 * Common hooks
-		 *
-		 * Executes on both the admin area and front area
-		 */
-		$common = new App\Common();
 
 	}
 

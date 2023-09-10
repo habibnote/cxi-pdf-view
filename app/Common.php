@@ -1,5 +1,5 @@
 <?php
-namespace Codexpert\CX_Plugin\App;
+namespace Codexpert\CXI_PDF_view\App;
 
 use Codexpert\Plugin\Base;
 

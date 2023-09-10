@@ -1,8 +1,7 @@
 <?php
-namespace Codexpert\CX_Plugin\App;
+namespace Codexpert\CXI_PDF_view\App;
 
 use Codexpert\Plugin\Base;
-use Codexpert\Plugin\Metabox;
 
 /**
  * if accessed directly, exit.
@@ -69,10 +68,10 @@ class Admin extends Base {
 	public function admin_menu() {
 
 		add_menu_page(
-			__( 'CX Plugin', 'cx-plugin' ),
-			__( 'CX Plugin', 'cx-plugin' ),
+			__( 'CXI PDF View', 'cxi-pdf-view' ),
+			__( 'CXI PDF View', 'cxi-pdf-view' ),
 			'manage_options',
-			'cx-plugin',
+			'cxi-pdf-view',
 			function(){},
 			'dashicons-pdf',
 			25

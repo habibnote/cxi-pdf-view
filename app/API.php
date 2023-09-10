@@ -1,8 +1,8 @@
 <?php
-namespace Codexpert\CX_Plugin\App;
+namespace Codexpert\CXI_PDF_view\App;
 
 use Codexpert\Plugin\Base;
-use Codexpert\CX_Plugin\API\Pdf;
+use Codexpert\CXI_PDF_view\API\Pdf;
 
 
 /**

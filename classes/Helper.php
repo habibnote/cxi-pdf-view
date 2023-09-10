@@ -1,5 +1,5 @@
 <?php
-namespace Codexpert\CX_Plugin;
+namespace Codexpert\CXI_PDF_view;
 
 /**
  * if accessed directly, exit.

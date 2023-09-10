@@ -10,8 +10,8 @@ if( ! function_exists( 'get_plugin_data' ) ) {
  * 
  * @return string $url the site URL
  */
-if( ! function_exists( 'cx_plugin_site_url' ) ) :
-function cx_plugin_site_url() {
+if( ! function_exists( 'cxi_plugin_view_site_url' ) ) :
+function cxi_plugin_view_site_url() {
 	$url = get_bloginfo( 'url' );
 
 	return $url;
