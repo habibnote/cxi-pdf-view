@@ -85,9 +85,9 @@ class Pdf {
 
 
             $response = array(
-                'status'    => 200,
-                'massage'   => 'succes',
-                'url'       => $url,
+                'status'       => 200,
+                'massage'      => 'succes',
+                'page_url'     => $url,
             );
 
             return $response;
