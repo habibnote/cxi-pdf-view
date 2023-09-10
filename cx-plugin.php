@@ -25,8 +25,6 @@
 
 namespace Codexpert\CX_Plugin;
 
-use Pluggable\Marketing\Survey;
-use Pluggable\Marketing\Feature;
 use Pluggable\Marketing\Deactivator;
 
 /**
@@ -181,16 +179,7 @@ final class Plugin {
 			 * Settings related hooks
 			 */
 			$settings = new App\Settings();
-			$settings->action( 'plugins_loaded', 'init_menu' );
-
-			/**
-			 * Asks to participate in a survey
-			 * 
-			 * @package Pluggable\Marketing
-			 * 
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$survey = new Survey( CXP_FILE );
+			// $settings->action( 'plugins_loaded', 'init_menu' );
 
 			/**
 			 * Shows a popup window asking why a user is deactivating the plugin
@@ -200,15 +189,6 @@ final class Plugin {
 			 * @author Pluggable <hi@pluggable.io>
 			 */
 			$deactivator = new Deactivator( CXP_FILE );
-
-			/**
-			 * Alters featured plugins
-			 * 
-			 * @package Pluggable\Marketing
-			 * 
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$feature = new Feature( CXP_FILE );
 
 		else : // ! is_admin() ?
 
@@ -225,7 +205,7 @@ final class Plugin {
 			 * Shortcode related hooks
 			 */
 			$shortcode = new App\Shortcode();
-			$shortcode->register( 'my-shortcode', 'my_shortcode' );
+			$shortcode->register( 'cxi-pdf-view', 'cxi_shortcode' );
 
 			/**
 			 * Custom REST API related hooks

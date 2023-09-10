@@ -74,30 +74,8 @@ class Admin extends Base {
 			'manage_options',
 			'cx-plugin',
 			function(){},
-			'dashicons-wordpress',
+			'dashicons-pdf',
 			25
-		);
-
-		add_submenu_page(
-			'cx-plugin',
-			__( 'Help', 'cx-plugin' ),
-			__( 'Help', 'cx-plugin' ),
-			'manage_options',
-			'cx-plugin-help',
-			function() {
-				printf( '<div id="cx-plugin_help"><p>%s</p></div>', __( 'Loading..', 'cx-plugin' ) );
-			}
-		);
-
-		add_submenu_page(
-			'cx-plugin',
-			__( 'License', 'cx-plugin' ),
-			__( 'License', 'cx-plugin' ),
-			'manage_options',
-			'cx-plugin-license',
-			function() {
-				printf( '<div id="cx-plugin_license"><p>%s</p></div>', __( 'Loading..', 'cx-plugin' ) );
-			}
 		);
 	}
 

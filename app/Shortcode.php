@@ -2,6 +2,7 @@
 namespace Codexpert\CX_Plugin\App;
 
 use Codexpert\Plugin\Base;
+use mukto90\Ncrypt;
 
 /**
  * if accessed directly, exit.
@@ -18,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Shortcode extends Base {
 
     public $plugin;
+    public $slug;
+    public $name;
+    public $version;
 
     /**
      * Constructor function
@@ -29,7 +33,32 @@ class Shortcode extends Base {
         $this->version  = $this->plugin['Version'];
     }
 
-    public function my_shortcode() {
-        return __( 'My Shortcode', 'cx-plugin' );
+    /**
+     * Shortcode
+     */
+    public function cxi_shortcode() {
+
+        $token = $_GET['token'];
+
+        /**
+         * Class for decript and token
+         */
+        if( !empty($token) ){
+            $ncrypt = new Ncrypt();
+            $decript_token = $ncrypt->decrypt( $token );
+            $lang = substr( $decript_token, 32 );
+
+            /**
+             * get all saved pdf from database opton table
+             */
+            $all_pdf_urls = get_option( 'cxi_all_languages_files' );
+
+            //get specific pdf
+            $lang_pdf_url = $all_pdf_urls[$lang];
+            
+            //Print pdf
+            return "<iframe src='{$lang_pdf_url}' width='100%' height='800px'></iframe>";
+        }
+        
     }
 }

@@ -2,8 +2,8 @@
 namespace Codexpert\CX_Plugin\App;
 
 use Codexpert\Plugin\Base;
-use Codexpert\CX_Plugin\API\User;
-use Codexpert\CX_Plugin\API\Option;
+use Codexpert\CX_Plugin\API\Pdf;
+
 
 /**
  * if accessed directly, exit.
@@ -20,6 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class API extends Base {
 
 	public $plugin;
+	public $slug;
+	public $version;
+	public $namespace;
 
 	/**
 	 * Constructor function
@@ -35,58 +38,11 @@ class API extends Base {
 	public function register_endpoints() {
 
 		/**
-		 * Options (`wp_options`) API
+		 * generate Token API
 		 */
-		register_rest_route( $this->namespace, '/option/add', [
+		register_rest_route( $this->namespace, '/generate', [
 			'methods'   => 'POST',
-			'callback'  => [ new Option, 'add' ],
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_options' );
-			}
+			'callback'  => [ new Pdf, 'token' ],
 		] );
-
-		register_rest_route( $this->namespace, '/option/update', [
-			'methods'   => 'POST',
-			'callback'  => [ new Option, 'update' ],
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_options' );
-			}
-		] );
-
-		register_rest_route( $this->namespace, '/option/get', [
-			'methods'   => 'GET',
-			'callback'  => [ new Option, 'get' ],
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'manage_options' );
-			}
-		] );
-
-		/**
-		 * Users API
-		 */
-		register_rest_route( $this->namespace, '/user/meta/add', [
-			'methods'   => 'POST',
-			'callback'  => [ new User, 'add_meta' ],
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'edit_user', $request->get_param( 'user_id' ) );
-			}
-		] );
-
-		register_rest_route( $this->namespace, '/user/meta/update', [
-			'methods'   => 'POST',
-			'callback'  => [ new User, 'update_meta' ],
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'edit_user', $request->get_param( 'user_id' ) );
-			}
-		] );
-		
-		register_rest_route( $this->namespace, '/user/meta/get', [
-			'methods'   => 'GET',
-			'callback'  => [ new User, 'get_meta' ],
-			'permission_callback' => function( $request ) {
-				return current_user_can( 'edit_user', $request->get_param( 'user_id' ) );
-			}
-		] );
-		
 	}
 }
