@@ -41,7 +41,7 @@ class API extends Base {
 		 * generate Token API
 		 */
 		register_rest_route( $this->namespace, '/generate', [
-			'methods'   => 'POST',
+			'methods'   => 'GET',
 			'callback'  => [ new Pdf, 'token' ],
 		] );
 	}

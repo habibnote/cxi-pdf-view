@@ -22,6 +22,10 @@ class Pdf {
 
     public function __construct(){
         $this->langs = get_option('cxi_all_languages_files');
+
+        /**
+         * getting all languages as a array
+         */
         foreach( $this->langs as $key => $value ){
             if( !empty( $value ) ){
                 array_push( $this->option_langs_list, $key );
@@ -29,19 +33,25 @@ class Pdf {
         }
     }
 
+    /**
+     * Get API request and take response
+     */
 	public function token( $request ) {
+        //intial param
         $hash    = strtolower( $request->get_param( 'hash' ) );
         $lang    = strtolower( $request->get_param( 'lang' ) );
 
-        if( empty( $hash ) ) return "Invalid Request";
-        if( empty( $lang ) ) return "Invalid Resuest";
+        //Check if empty or not
+        if( empty( $hash ) ) return "Invalid Param";
+        if( empty( $lang ) ) return "Invalid Param";
 
+        //Check has is equal to 32
         if( strlen( $hash ) !== 32 ){
             return "Hash must be 32 character";
         }
 
+        //Check pdf exit or not
         if( in_array( $lang, $this->option_langs_list ) ) {
-
             $row_token = $hash . $lang;
 
             /**
@@ -52,25 +62,36 @@ class Pdf {
 
             /**
              * Check page is exit or not
+             * 
+             * if not than it will create first
              */
-            $page = get_page_by_path('view');
+            $page = get_page_by_path( 'view' );
             if( !$page ){
                 $new_page = array(
-                    'post_title' => 'View', // Change this to your desired page title
-                    'post_type' => 'page',
-                    'post_name' => 'view',
-                    'post_status' => 'publish',
+                    'post_title'    => 'View', // Change this to your desired page title
+                    'post_type'     => 'page',
+                    'post_name'     => 'view',
+                    'post_status'   => 'publish',
                 );
             
+                //Create a page
                 wp_insert_post($new_page);
             }
 
             /**
-             * Create New Page Url
+             * Create New Page Url 
              */
             $url = home_url() . "/view" . "/?token={$token}";
-            
-            return $url;
+
+
+            $response = array(
+                'status'    => 200,
+                'massage'   => 'succes',
+                'url'       => $url,
+            );
+
+            return $response;
+
         }else{
             return "Sorry! This languages is not available Please try another languages";
         }

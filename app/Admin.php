@@ -44,12 +44,10 @@ class Admin extends Base {
 	 * Enqueue JavaScripts and stylesheets
 	 */
 	public function enqueue_scripts() {
-		$min = defined( 'CXP_DEBUG' ) && CXP_DEBUG ? '' : '.min';
-		
-		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin{$min}.css", CXP_FILE ), '', $this->version, 'all' );
-		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin{$min}.js", CXP_FILE ), [ 'jquery' ], $this->version, true );
 
-	    // wp_enqueue_style( "{$this->slug}-react", plugins_url( 'build/index.css', CXP_FILE ) );
+		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin.css", CXP_FILE ), '', $this->version, 'all' );
+		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin.js", CXP_FILE ), [ 'jquery' ], $this->version, true );
+
 	    wp_enqueue_script( "{$this->slug}-react", plugins_url( 'build/index.js', CXP_FILE ), [ 'wp-element' ], '1.0.0', true );
 
 	    $localized = [
@@ -65,6 +63,9 @@ class Admin extends Base {
 	    wp_localize_script( $this->slug, 'CXP', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
 
+	/**
+	 * Creating menu
+	 */
 	public function admin_menu() {
 
 		add_menu_page(
@@ -78,29 +79,24 @@ class Admin extends Base {
 		);
 	}
 
+	//attach setting page
 	public function action_links( $links ) {
 		$this->admin_url = admin_url( 'admin.php' );
 
 		$new_links = [
-			'settings'	=> sprintf( '<a href="%1$s">' . __( 'Settings', 'cx-plugin' ) . '</a>', add_query_arg( 'page', $this->slug, $this->admin_url ) )
+			'settings'	=> sprintf( '<a href="%1$s">' . __( 'Settings', 'cxi-pdf-view' ) . '</a>', add_query_arg( 'page', $this->slug, $this->admin_url ) )
 		];
 		
 		return array_merge( $new_links, $links );
 	}
 
-	public function plugin_row_meta( $plugin_meta, $plugin_file ) {
-		
-		if ( $this->plugin['basename'] === $plugin_file ) {
-			$plugin_meta['help'] = '<a href="https://help.codexpert.io/" target="_blank" class="cx-help">' . __( 'Help', 'cx-plugin' ) . '</a>';
-		}
-
-		return $plugin_meta;
-	}
-
 	public function update_cache( $post_id, $post, $update ) {
-		wp_cache_delete( "cx_plugin_{$post->post_type}", 'cx_plugin' );
+		wp_cache_delete( "cx_plugin_{$post->post_type}", 'cxi-pdf-view' );
 	}
 
+	/**
+	 * added footer text
+	 */
 	public function footer_text( $text ) {
 		if( get_current_screen()->parent_base != $this->slug ) return $text;
 

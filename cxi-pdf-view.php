@@ -25,8 +25,6 @@
 
 namespace Codexpert\CXI_PDF_view;
 
-use Pluggable\Marketing\Deactivator;
-
 /**
  * if accessed directly, exit.
  */
@@ -171,7 +169,6 @@ final class Plugin {
 			$admin->action( 'admin_menu', 'admin_menu' );
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 			$admin->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
-			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
 			$admin->action( 'save_post', 'update_cache', 10, 3 );
 			$admin->action( 'admin_footer_text', 'footer_text' );
 
@@ -180,15 +177,6 @@ final class Plugin {
 			 */
 			$settings = new App\Settings();
 			$settings->action( 'plugins_loaded', 'init_menu' );
-
-			/**
-			 * Shows a popup window asking why a user is deactivating the plugin
-			 * 
-			 * @package Pluggable\Marketing
-			 * 
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$deactivator = new Deactivator( CXP_FILE );
 
 		else : // ! is_admin() ?
 
@@ -207,20 +195,6 @@ final class Plugin {
 		endif;
 
 	}
-
-	/**
-	 * Cloning is forbidden.
-	 * 
-	 * @access public
-	 */
-	public function __clone() { }
-
-	/**
-	 * Unserializing instances of this class is forbidden.
-	 * 
-	 * @access public
-	 */
-	public function __wakeup() { }
 
 	/**
 	 * Instantiate the plugin
